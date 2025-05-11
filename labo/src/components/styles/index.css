@@ -206,6 +206,7 @@ a:hover {
 .favoritos-grid {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   gap: 12px;
 }
 
@@ -233,4 +234,129 @@ a:hover {
   color: #cccccc;
   font-size: 0.9em;
   margin-top: 4px;
+}
+
+.recomendaciones-fotos {
+  width: 180px;        
+  height: 180px;        
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+.pagination button {
+  background-color: #1db954; /* verde Spotify */
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #17a44b;
+}
+
+.pagination button:disabled {
+  background-color: #333;
+  color: #aaa;
+  cursor: default;
+}
+
+.pagination span {
+  color: white;
+  font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+  .main-contenedor-contenido {
+    grid-template-columns: 1fr;
+  }
+
+  .div-busqueda {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .busqueda-agrega-contenedor {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .acciones-usuario {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+
+   .div-busqueda {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .busqueda-agrega-contenedor {
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input-busqueda {
+    width: 80vw;
+  }
+  .tabla-desktop {
+    display: none;
+  }
+
+  .cards-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .card-cancion {
+    background-color: #121212;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .titulo-card {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  .cards-mobile {
+    display: none;
+  }
 }
