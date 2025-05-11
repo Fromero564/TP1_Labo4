@@ -1,9 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import './styles/addform.css';
+
 
 const AddForm = ({ onClose }) => {
   const [titulo, setTitulo] = useState('');
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  const handleOverlayClick = (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+      onClose();
+    }
+  };
 
   const validarYoutube = (url) => {
     const regex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/;
@@ -12,24 +28,16 @@ const AddForm = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validarYoutube(url)) {
       setError('La URL debe ser un enlace válido de YouTube.');
       return;
     }
 
     const nuevaCancion = { titulo, url };
-
-    // Leer canciones anteriores o iniciar array vacío
     const cancionesGuardadas = JSON.parse(localStorage.getItem('canciones')) || [];
-
-    // Agregar nueva canción
     cancionesGuardadas.push(nuevaCancion);
-
-    // Guardar en localStorage
     localStorage.setItem('canciones', JSON.stringify(cancionesGuardadas));
 
-    // Resetear campos y cerrar
     setTitulo('');
     setUrl('');
     setError('');
@@ -37,11 +45,12 @@ const AddForm = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      <div className="modal-content">
         <h2>Agregar canción</h2>
         <form onSubmit={handleSubmit}>
           <input
+            className="modal-input"
             type="text"
             placeholder="Título de la canción"
             value={titulo}
@@ -49,15 +58,18 @@ const AddForm = ({ onClose }) => {
             required
           />
           <input
+            className="modal-input"
             type="text"
             placeholder="URL de YouTube"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
           />
-          {error && <p className="error">{error}</p>}
-          <button type="submit">Guardar</button>
-          <button type="button" onClick={onClose}>Cancelar</button>
+          {error && <p className="error" style={{ color: 'red' }}>{error}</p>}
+          <div className="modal-buttons">
+            <button type="submit">Guardar</button>
+            <button type="button" onClick={onClose} className="cancelar">Cancelar</button>
+          </div>
         </form>
       </div>
     </div>
