@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import './styles/addform.css';
 
-
 const AddForm = ({ onClose }) => {
   const [titulo, setTitulo] = useState('');
   const [url, setUrl] = useState('');
@@ -33,8 +32,24 @@ const AddForm = ({ onClose }) => {
       return;
     }
 
-    const nuevaCancion = { titulo, url };
     const cancionesGuardadas = JSON.parse(localStorage.getItem('canciones')) || [];
+
+    const yaExiste = cancionesGuardadas.some(c =>
+      c.url.trim().toLowerCase() === url.trim().toLowerCase() ||
+      c.titulo.trim().toLowerCase() === titulo.trim().toLowerCase()
+    );
+
+    if (yaExiste) {
+      setError('Esta canción ya fue agregada.');
+      return;
+    }
+
+    const nuevaCancion = {
+      titulo: titulo.trim(),
+      url: url.trim(),
+      reproducciones: 0
+    };
+
     cancionesGuardadas.push(nuevaCancion);
     localStorage.setItem('canciones', JSON.stringify(cancionesGuardadas));
 
