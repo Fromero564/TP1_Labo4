@@ -210,8 +210,20 @@ const Index = () => {
                     {/* Columna derecha */}
                     <div className="columna derecha">
                         <h2>Recomendaciones</h2>
-                        <img src={Trap} alt="recomendación de trap" className='recomendaciones-fotos' />
+                        <a
+                            href="https://www.youtube.com/channel/UCJUYcEdvnYFGajHBW0Nao3w"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src={Trap} alt="recomendación de trap" className="recomendaciones-fotos" />
+                        </a>
+                          <a
+                            href="https://www.youtube.com/channel/UCT9zcQNlyht7fRlcjmflRSA"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                         <img src={ImagineDragons} alt="recomendación de Imagine Dragons" className='recomendaciones-fotos' />
+                        </a>
                     </div>
                 </div>
 
